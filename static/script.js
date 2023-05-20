@@ -1,6 +1,6 @@
-function nextQuestion(answer) {
+function nextQuestion(answer, currentQuestion) {
     // Hide the current question
-    var currentQuestion = document.getElementById('question1');
+    var currentQuestion = document.getElementById(currentQuestion);
     currentQuestion.style.display = 'none';
 
     // Show the next question based on the selected answer
@@ -21,6 +21,14 @@ function nextQuestion(answer) {
         case 'experience':
             nextQuestion = document.getElementById('question5');
             break;
+        case 'aboutProject':
+            nextQuestion = document.getElementById('question6');
+            break;
+        case 'mcus':
+            nextQuestion = document.getElementById('question7');
+            break;
+        case 'mcuOptions':
+            nextQuestion = document.getElementById('mcuOptions');
         default:
             // Handle any other cases or error conditions
             break;

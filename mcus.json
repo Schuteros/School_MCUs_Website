@@ -1,0 +1,164 @@
+[
+  {
+    "name": "Arduino Uno",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": false,
+    "highComputationalPower": false
+  },
+  {
+    "name": "ESP32",
+    "lowEnergy": true,
+    "bluetooth": true,
+    "wifi": true,
+    "audio": true,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "Raspberry Pi",
+    "lowEnergy": false,
+    "bluetooth": true,
+    "wifi": true,
+    "audio": true,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "Arduino Mega",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "nRF52840",
+    "lowEnergy": true,
+    "bluetooth": true,
+    "wifi": false,
+    "audio": true,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "nRF9160",
+    "lowEnergy": true,
+    "bluetooth": true,
+    "wifi": true,
+    "audio": false,
+    "multiplePorts": false,
+    "highComputationalPower": false
+  },
+  {
+    "name": "STM32F103",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "STM32F407",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "PIC32MZ",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "ATmega328P",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "STM32L4",
+    "lowEnergy": true,
+    "bluetooth": true,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "ATSAMD21G18A",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "PIC16F877A",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "STM32 Discovery",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "nRF51822",
+    "lowEnergy": true,
+    "bluetooth": true,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "STM32 Nucleo",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": true
+  },
+  {
+    "name": "ESP8266",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": true,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  },
+  {
+    "name": "Arduino Nano",
+    "lowEnergy": false,
+    "bluetooth": false,
+    "wifi": false,
+    "audio": false,
+    "multiplePorts": true,
+    "highComputationalPower": false
+  }
+]

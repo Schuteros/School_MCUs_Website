@@ -10,45 +10,45 @@
     <div class="question" id="question1">
         <p>Why do you need MCU's?</p>
         <div class="options">
-            <button class="option" onclick="nextQuestion('learn')">I want to learn about programming MCU's</button>
-            <button class="option" onclick="nextQuestion('project')">I have a specific programming project idea</button>
-            <button class="option" onclick="nextQuestion('explore')">I don't have much experience with MCU's, but I'm interested in exploring</button>
-            <button class="option" onclick="nextQuestion('experience')">I have extensive experience with MCU's and want to work on a complex project</button>
+            <button class="option" onclick="nextQuestion('learn', 'question1')">I want to learn about programming MCU's</button>
+            <button class="option" onclick="nextQuestion('project', 'question1')">I have a specific programming project idea</button>
+            <button class="option" onclick="nextQuestion('explore', 'question1')">I don't have much experience with MCU's, but I'm interested in exploring</button>
+            <button class="option" onclick="nextQuestion('experience', 'question1')">I have extensive experience with MCU's and want to work on a complex project</button>
         </div>
     </div>
     <div class="question" id="question2" style="display: none;">
         <p>Are you a beginner in programming?</p>
         <div class="options">
             <button class="option" onclick="location.href='/mcus/beginner'">Yes</button>
-            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+            <button class="option" onclick="nextQuestion('aboutProject', 'question2')">No</button>
         </div>
     </div>
     <div class="question" id="question3" style="display: none;">
         <p>Are you looking for MCU options with specific capabilities for your project?</p>
         <div class="options">
-            <button class="option" onclick="nextQuestion('mcuOptions')">Yes</button>
-            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+            <button class="option" onclick="nextQuestion('mcuOptions', 'question3')">Yes</button>
+            <button class="option" onclick="nextQuestion('aboutProject', 'question3')">No</button>
         </div>
     </div>
     <div class="question" id="question4" style="display: none;">
         <p>Do you prefer beginner-friendly MCU options?</p>
         <div class="options">
             <button class="option" onclick="location.href='/mcus/beginner'">Yes</button>
-            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+            <button class="option" onclick="nextQuestion('aboutProject', 'question4')">No</button>
         </div>
     </div>
     <div class="question" id="question5" style="display: none;">
         <p>Are you looking for high-performance MCU options?</p>
         <div class="options">
-            <button class="option" onclick="location.href='/mcus/highPerformance'">Yes</button>
-            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+            <button class="option" onclick="location.href='/mcus/high'">Yes</button>
+            <button class="option" onclick="nextQuestion('aboutProject', 'question5')">No</button>
         </div>
     </div>
     <div class="question" id="question6" style="display: none;">
         <p>Are you interested in a specific type of MCU project?</p>
         <div class="options">
-            <button class="option" onclick="nextQuestion('mcuOPTIONS')">Yes</button>
-            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+            <button class="option" onclick="nextQuestion('mcuOptions', 'question6')">Yes</button>
+            <button class="option" onclick="nextQuestion('mcus', 'question6')">No</button>
         </div>
     </div>
     <div class="question" id="question7" style="display: none;">
@@ -58,6 +58,44 @@
             <button class="option" onclick="location.href='/mcus/moderate'">Moderate budget, I can invest a reasonable amount.</button>
             <button class="option" onclick="location.href='/mcus/high'">High budget, cost is not a significant concern.</button>
         </div>
+    </div>
+    <div>
+
+    <div class="question" id="mcuOptions" style="display: none;">
+        <p>Specify your requirements:</p>
+        <div class="options">
+            <form action="/mcus/find" method="post" id="form">
+                <label>
+                    <input type="checkbox" name="options" value="low">
+                    Low energy
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="options" value="bluetooth">
+                    Bluetooth
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="options" value="wifi">
+                    Wi-Fi
+                </label>
+                <br>
+                <label><input type="checkbox" name="options" value="audio">
+                    Audio
+                </label>
+                <br>
+                <label><input type="checkbox" name="options" value="multiport">
+                    Multiple ports/pins
+                </label>
+                <br>
+                <label><input type="checkbox" name="options" value="highspeed">
+                    High computational power
+                </label>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
     </div>
 </div>
 
