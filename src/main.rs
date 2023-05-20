@@ -19,42 +19,56 @@ async fn mcu_finder(form: web::Form<Vec<Vec<String>>>, mcus: Data<Mutex<Vec<Mcu>
     // Parse the form data from the request
     let mut mcu_data = HashMap::new();
     println!("{:?}", form.0);
-    for vector in form.0 {
-        if vector.contains(&("low".to_string())) {
-            mcu_data.insert("lowEnergy".to_string(), true);
-        } else if !mcu_data.contains_key("lowEnergy") {
-            mcu_data.insert("lowEnergy".to_string(), false);
+
+    if form.0.len() != 0 {
+        for vector in form.0 {
+            if vector.contains(&("low".to_string())) {
+                mcu_data.insert("lowEnergy".to_string(), true);
+            } else if !mcu_data.contains_key("lowEnergy") {
+                mcu_data.insert("lowEnergy".to_string(), false);
+            }
+            if vector.contains(&("bluetooth".to_string())) {
+                mcu_data.insert("bluetooth".to_string(), true);
+            } else if !mcu_data.contains_key("bluetooth") {
+                mcu_data.insert("bluetooth".to_string(), false);
+            }
+            if vector.contains(&("wifi".to_string())) {
+                mcu_data.insert("wifi".to_string(), true);
+            } else if !mcu_data.contains_key("wifi") {
+                mcu_data.insert("wifi".to_string(), false);
+            }
+            if vector.contains(&("audio".to_string())) {
+                mcu_data.insert("audio".to_string(), true);
+            } else if !mcu_data.contains_key("audio") {
+                mcu_data.insert("audio".to_string(), false);
+            }
+            if vector.contains(&("multiport".to_string())) {
+                mcu_data.insert("multiplePorts".to_string(), true);
+            } else if !mcu_data.contains_key("multiplePorts") {
+                mcu_data.insert("multiplePorts".to_string(), false);
+            }
+            if vector.contains(&("highspeed".to_string())) {
+                mcu_data.insert("highComputationPower".to_string(), true);
+            } else if !mcu_data.contains_key("highComputationalPower") {
+                mcu_data.insert("highComputationalPower".to_string(), false);
+            }
         }
-        if vector.contains(&("bluetooth".to_string())) {
-            mcu_data.insert("bluetooth".to_string(), true);
-        } else if !mcu_data.contains_key("bluetooth") {
-            mcu_data.insert("bluetooth".to_string(), false);
-        }
-        if vector.contains(&("wifi".to_string())) {
-            mcu_data.insert("wifi".to_string(), true);
-        } else if !mcu_data.contains_key("wifi") {
-            mcu_data.insert("wifi".to_string(), false);
-        }
-        if vector.contains(&("audio".to_string())) {
-            mcu_data.insert("audio".to_string(), true);
-        } else if !mcu_data.contains_key("audio") {
-            mcu_data.insert("audio".to_string(), false);
-        }
-        if vector.contains(&("multiport".to_string())) {
-            mcu_data.insert("multiplePorts".to_string(), true);
-        } else if !mcu_data.contains_key("multiplePorts") {
-            mcu_data.insert("multiplePorts".to_string(), false);
-        }
-        if vector.contains(&("highspeed".to_string())) {
-            mcu_data.insert("highComputationPower".to_string(), true);
-        } else if !mcu_data.contains_key("highComputationPower") {
-            mcu_data.insert("highComputationPower".to_string(), false);
-        }
+    } else {
+        mcu_data.insert("lowEnergy".to_string(), false);
+        mcu_data.insert("bluetooth".to_string(), false);
+        mcu_data.insert("wifi".to_string(), false);
+        mcu_data.insert("audio".to_string(), false);
+        mcu_data.insert("multiplePorts".to_string(), false);
+        mcu_data.insert("highComputationalPower".to_string(), false);
     }
     println!("{:?}", &mcu_data);
     let mcus = mcus.lock().unwrap().clone();
     println!("{:?}", &mcus);
-    let mcu = find_matching_mcu(&mcus, &mcu_data).unwrap();
+    let mcu = find_matching_mcu(&mcus, &mcu_data);
+    let mcu = match mcu {
+        Some(mcu) => mcu,
+        None => {return HttpResponse::Ok().body("ATmega168p");},
+    };
 
     // Return an HTTP response
     HttpResponse::Ok().body(mcu.name.clone())
@@ -80,48 +94,65 @@ struct Mcu {
 }
 
 fn find_matching_mcu(mcus: &[Mcu], requirements: &HashMap<String, bool>) -> Option<Mcu> {
-    let mut exact_match: Option<Mcu> = None;
     let mut best_mcu: Option<Mcu> = None;
-    let mut least_additional_features = std::usize::MAX;
+
+    let mut requirements_matched_true_best = 0;
+    let mut requirements_matched_false_best = 0;
 
     for mcu in mcus {
-        let mut additional_features = 0;
-        let mut all_requirements_matched = true;
+        let mut requirements_matched_true = 0;
+        let mut requirements_matched_false = 0;
 
-        for (requirement, &value) in requirements {
-            let mcu_feature = match requirement.as_str() {
-                "lowEnergy" => mcu.low_energy,
-                "bluetooth" => mcu.bluetooth,
-                "wifi" => mcu.wifi,
-                "audio" => mcu.audio,
-                "multiplePorts" => mcu.multiple_ports,
-                "highComputationPower" => mcu.high_computational_power,
-                _ => false,
-            };
-
-            if mcu_feature == value {
-                additional_features += 1;
-            } else if value {
-                all_requirements_matched = false;
-                break;
+        if requirements.get("lowEnergy").unwrap() == &mcu.low_energy {
+            if mcu.low_energy == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
             }
         }
-
-        if all_requirements_matched {
-            if additional_features < least_additional_features {
-                least_additional_features = additional_features;
-                best_mcu = Some(mcu.clone());
+        if requirements.get("bluetooth").unwrap() == &mcu.bluetooth {
+            if mcu.bluetooth == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
             }
         }
-
-        if additional_features == 6 {
-            // Exact match found
-            exact_match = Some(mcu.clone());
-            break;
+        if requirements.get("wifi").unwrap() == &mcu.wifi {
+            if mcu.wifi == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
+            }
+        }
+        if requirements.get("audio").unwrap() == &mcu.audio {
+            if mcu.audio == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
+            }
+        }
+        if requirements.get("multiplePorts").unwrap() == &mcu.multiple_ports {
+            if mcu.multiple_ports == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
+            }
+        }
+        if requirements.get("highComputationalPower").unwrap() == &mcu.multiple_ports {
+            if mcu.multiple_ports == true {
+                requirements_matched_true += 1;
+            } else {
+                requirements_matched_false += 1;
+            }
+        }
+        if requirements_matched_true_best <= requirements_matched_true && requirements_matched_false_best < requirements_matched_false && requirements_matched_true > 0{
+            requirements_matched_true_best = requirements_matched_true;
+            requirements_matched_false_best = requirements_matched_false;
+            best_mcu = Some(mcu.clone());
         }
     }
 
-    exact_match.or(best_mcu)
+    best_mcu
 }
 
 async fn low() -> Result<NamedFile> {
