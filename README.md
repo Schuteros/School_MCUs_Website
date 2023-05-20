@@ -6,4 +6,4 @@
 3. In that directory open cmd (Windows) or terminal (Linux)
 4. If windows or linux: write git clone https://github.com/Schuteros/School_MCUs_Website
 5. go to the "./School_MCUs_Website/"
-6. in cmd or terminal run cargo run --release
+6. in cmd or terminal run "cargo run --release"
