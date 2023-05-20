@@ -4,6 +4,6 @@
 1. Installing rustup and its dependencies: [tutorial](https://rust-lang.github.io/rustup/installation/index.html)
 2. Go to the directory where you want to store code
 3. In that directory open cmd (Windows) or terminal (Linux)
-4. If windows or linux: write git clone https://github.com/Schuteros/School_MCUs_Website
+4. If windows or linux: write "git clone https://github.com/Schuteros/School_MCUs_Website"
 5. go to the "./School_MCUs_Website/"
 6. in cmd or terminal run "cargo run --release"
