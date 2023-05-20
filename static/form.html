@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>MCU Selector</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css">
 </head>
 <body>
 <div class="question-container">
@@ -18,7 +19,7 @@
     <div class="question" id="question2" style="display: none;">
         <p>Are you a beginner in programming?</p>
         <div class="options">
-            <button class="option" onclick="">Yes</button>
+            <button class="option" onclick="location.href='/mcus/beginner'">Yes</button>
             <button class="option" onclick="nextQuestion('aboutProject')">No</button>
         </div>
     </div>
@@ -30,48 +31,36 @@
         </div>
     </div>
     <div class="question" id="question4" style="display: none;">
-        <p>Are you looking for MCU options with specific capabilities for your project?</p>
+        <p>Do you prefer beginner-friendly MCU options?</p>
         <div class="options">
-            <button class="option" onclick="nextQuestion('mcuOptions')">Yes</button>
+            <button class="option" onclick="location.href='/mcus/beginner'">Yes</button>
             <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+        </div>
+    </div>
+    <div class="question" id="question5" style="display: none;">
+        <p>Are you looking for high-performance MCU options?</p>
+        <div class="options">
+            <button class="option" onclick="location.href='/mcus/highPerformance'">Yes</button>
+            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+        </div>
+    </div>
+    <div class="question" id="question6" style="display: none;">
+        <p>Are you interested in a specific type of MCU project?</p>
+        <div class="options">
+            <button class="option" onclick="nextQuestion('mcuOPTIONS')">Yes</button>
+            <button class="option" onclick="nextQuestion('aboutProject')">No</button>
+        </div>
+    </div>
+    <div class="question" id="question7" style="display: none;">
+        <p>What is your budget for MCU and related components?</p>
+        <div class="options">
+            <button class="option" onclick="location.href='/mcus/low'">Low budget, I'm looking for affordable options.</button>
+            <button class="option" onclick="location.href='/mcus/moderate'">Moderate budget, I can invest a reasonable amount.</button>
+            <button class="option" onclick="location.href='/mcus/high'">High budget, cost is not a significant concern.</button>
         </div>
     </div>
 </div>
 
-<script>
-    function nextQuestion(answer) {
-        // Hide the current question
-        var currentQuestion = document.getElementById('question1');
-        currentQuestion.style.display = 'none';
-
-        // Show the next question based on the selected answer
-        var nextQuestion;
-        switch (answer) {
-            case 'learn':
-                nextQuestion = document.getElementById('question2');
-                break;
-            case 'project':
-                // Logic for the next question based on project idea
-                // Add code here to populate the next question div dynamically
-                break;
-            case 'explore':
-                // Logic for the next question based on exploration interest
-                // Add code here to populate the next question div dynamically
-                break;
-            case 'experience':
-                // Logic for the next question based on experience level
-                // Add code here to populate the next question div dynamically
-                break;
-            default:
-                // Handle any other cases or error conditions
-                break;
-        }
-
-        // Show the next question
-        if (nextQuestion) {
-            nextQuestion.style.display = 'block';
-        }
-    }
-</script>
+<script src="static/script.js"></script>
 </body>
 </html>
